@@ -1,0 +1,28 @@
+.list {
+    display: flex;
+}
+
+.item {
+    width: calc(100% / 4);
+    padding-right: 15px;
+}
+
+.name {
+    font-size: 18px;
+    line-height: 22px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 730px) {
+    .list {
+        flex-wrap: wrap;
+    }
+
+    .item {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        padding-right: 0;
+    }
+}

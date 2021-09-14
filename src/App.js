@@ -1,38 +1,55 @@
 import { useEffect, useState } from 'react';
-import WeatherAPI from './api/weather';
 import Switcher from './components/Switcher';
 import ChooseCity from './components/ChooseCity';
 import Weather from './components/Weather';
 import Parameters from './components/Parameters';
 import fillParams from './utils/fillParams';
+import UnitsType from './types/units';
+import useWhether from './hooks/useWhether';
+import convertToFahrenheit from './utils/convertToFahrenheit';
 
 const App = () => {
-  const [city] = useState('Архангельск');
-  const [data, setData] = useState(null);
-  const [unit, setUnit] = useState('C');
+  const { data, loading, fetchWhetherData } = useWhether();
+  const [city, setCity] = useState('Архангельск');
+  const [unit, setUnit] = useState(UnitsType.C);
+  const temp = data?.main?.temp;
 
   useEffect(() => {
     (async () => {
-      setData(await WeatherAPI.getByCity(city));
+      await fetchWhetherData(city);
     })();
   }, []);
+
+  const searchCityHandler = async (cityName) => {
+    await fetchWhetherData(cityName);
+    setCity(cityName);
+  };
 
   return (
     <div className="container">
       <header className="header">
-        <ChooseCity city={city} />
+        <ChooseCity
+          city={city}
+          onSubmit={searchCityHandler}
+        />
         <Switcher
           active={unit}
           toggle={setUnit}
         />
       </header>
-      {data && (
-        <Weather
-          temp={data.main.temp}
-          desc={data.weather[0].description}
-        />
+      {!loading ? (
+        <>
+          {data && (
+            <Weather
+              temp={unit === UnitsType.C ? temp : convertToFahrenheit(temp)}
+              desc={data.weather[0].description}
+            />
+          )}
+          {data && <Parameters list={fillParams(data)} />}
+        </>
+      ) : (
+        <div>Загрузка</div>
       )}
-      {data && <Parameters list={fillParams(data)} />}
     </div>
   );
 };
