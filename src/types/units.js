@@ -3,4 +3,6 @@ const UnitsType = {
   F: 'F'
 };
 
+Object.freeze(UnitsType);
+
 export default UnitsType;

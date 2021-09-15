@@ -1,18 +1,28 @@
 import { useEffect, useState } from 'react';
+
 import Switcher from './components/Switcher';
 import ChooseCity from './components/ChooseCity';
 import Weather from './components/Weather';
 import Parameters from './components/Parameters';
+import Loader from './components/Loader';
+import Error from './components/Error';
+
 import fillParams from './utils/fillParams';
 import UnitsType from './types/units';
 import useWhether from './hooks/useWhether';
 import convertToFahrenheit from './utils/convertToFahrenheit';
 
 const App = () => {
-  const { data, loading, fetchWhetherData } = useWhether();
+  const {
+    data,
+    loading,
+    error,
+    setError,
+    fetchWhetherData
+  } = useWhether();
   const [city, setCity] = useState('Архангельск');
   const [unit, setUnit] = useState(UnitsType.C);
-  const temp = data?.main?.temp;
+  const t = data?.main?.temp;
 
   useEffect(() => {
     (async () => {
@@ -21,6 +31,7 @@ const App = () => {
   }, []);
 
   const searchCityHandler = async (cityName) => {
+    if (error) setError(false);
     await fetchWhetherData(cityName);
     setCity(cityName);
   };
@@ -37,18 +48,28 @@ const App = () => {
           toggle={setUnit}
         />
       </header>
-      {!loading ? (
+      {error && !loading && (
+        <Error
+          error={error}
+          onTryAgain={() => searchCityHandler(city)}
+        />
+      )}
+
+      {!error && loading && (
+        <Loader />
+      )}
+
+      {!error && !loading && (
         <>
           {data && (
             <Weather
-              temp={unit === UnitsType.C ? temp : convertToFahrenheit(temp)}
+              temp={unit === UnitsType.C ? t : convertToFahrenheit(t)}
               desc={data.weather[0].description}
+              icon={data.weather[0].main}
             />
           )}
           {data && <Parameters list={fillParams(data)} />}
         </>
-      ) : (
-        <div>Загрузка</div>
       )}
     </div>
   );

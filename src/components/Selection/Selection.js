@@ -8,11 +8,11 @@ const cities = [
   'Санкт-Петербург'
 ];
 
-const Selection = ({ onSubmit }) => {
-  const [city, setCity] = useState('Архангельск');
+const Selection = ({ city, onSubmit }) => {
+  const [activeCity, setActiveCity] = useState(city);
 
   const submitHandler = (e) => {
-    onSubmit(city);
+    onSubmit(activeCity);
     e.preventDefault();
   };
 
@@ -23,8 +23,8 @@ const Selection = ({ onSubmit }) => {
     >
       <select
         className={s.select}
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
+        value={activeCity}
+        onChange={(e) => setActiveCity(e.target.value)}
       >
         {cities.map((name) =>
           <option key={name} value={name}>

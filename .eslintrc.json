@@ -28,6 +28,8 @@
     "react/jsx-wrap-multilines": "off",
     "function-paren-newline": "off",
     "class-methods-use-this": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-bitwise": "off",
+    "no-mixed-operators": "off"
   }
 }

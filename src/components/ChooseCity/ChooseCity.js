@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
-import s from './ChooseCity.module.css';
-import sprite from '../../assets/[icons].svg';
 import Selection from '../Selection';
 import useOutsideClick from '../../hooks/useOutsideClick';
+import ChooseCityPanel from '../ChooseCityPanel';
 
 const ChooseCity = ({ city, onSubmit }) => {
   const [isChoosing, setIsChoosing] = useState(false);
@@ -22,32 +21,16 @@ const ChooseCity = ({ city, onSubmit }) => {
   return (
     isChoosing ? (
       <div ref={ref}>
-        <Selection onSubmit={submitHandler} />
+        <Selection
+          city={city}
+          onSubmit={submitHandler}
+        />
       </div>
     ) : (
-      <div>
-        <h2 className={s.title}>
-          {city}
-        </h2>
-        <div className={s.actions}>
-          <button
-            className={s.btn}
-            type="button"
-            onClick={() => setIsChoosing(true)}
-          >
-            Сменить город
-          </button>
-          <button
-            className={s.btn}
-            type="button"
-          >
-            <svg>
-              <use href={`${sprite}#geo`} />
-            </svg>
-            Мое местоположение
-          </button>
-        </div>
-      </div>
+      <ChooseCityPanel
+        city={city}
+        openForm={() => setIsChoosing(true)}
+      />
     )
   );
 };

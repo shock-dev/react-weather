@@ -1,14 +1,22 @@
 import s from './Weather.module.css';
-import SunImg from '../../assets/sun.png';
+import Rain from '../../assets/weather/Rain.png';
+import Clouds from '../../assets/weather/Clouds.png';
+import Clear from '../../assets/weather/Clear.png';
 
-const Weather = ({ temp, desc }) => {
+const icons = {
+  Rain,
+  Clouds,
+  Clear
+};
+
+const Weather = ({ temp, desc, icon }) => {
   return (
     <div className={s.wrapper}>
       <div className={s.top}>
         <img
           className={s.img}
-          src={SunImg}
-          alt="Sun"
+          src={icons[icon]}
+          alt={icon}
         />
         <span className={s.degrees}>
           {Math.round(temp)}

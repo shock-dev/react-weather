@@ -1,8 +1,10 @@
+import degToStr from './degToString';
+
 const fillParams = (res) => {
   return [
     {
       title: 'Ветер',
-      value: `${res.wind.speed} м/c, западный`
+      value: `${res.wind.speed} м/c, ${degToStr(res.wind.deg)}`
     },
     {
       title: 'Давление',
@@ -14,7 +16,7 @@ const fillParams = (res) => {
     },
     {
       title: 'Вероятность дождя',
-      value: '56%'
+      value: '10%'
     }
   ];
 };
