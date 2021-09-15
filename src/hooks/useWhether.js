@@ -3,13 +3,16 @@ import WeatherAPI from '../api/weather';
 
 const useWhether = () => {
   const [data, setData] = useState(null);
+  const [city, setCity] = useState('Архангельск');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchWhetherData = async (city) => {
+  const fetchWhetherData = async (cityTitle) => {
     try {
+      if (error) setError(false);
+      setCity(cityTitle);
       setLoading(true);
-      setData(await WeatherAPI.getByCity(city));
+      setData(await WeatherAPI.getByCity(cityTitle));
     } catch (e) {
       setError('Что-то пошло не так 😳');
     } finally {
@@ -19,9 +22,9 @@ const useWhether = () => {
 
   return {
     data,
+    city,
     loading,
     error,
-    setError,
     fetchWhetherData
   };
 };

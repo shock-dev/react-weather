@@ -15,33 +15,26 @@ import convertToFahrenheit from './utils/convertToFahrenheit';
 const App = () => {
   const {
     data,
+    city,
     loading,
     error,
-    setError,
     fetchWhetherData
   } = useWhether();
-  const [city, setCity] = useState('Архангельск');
   const [unit, setUnit] = useState(UnitsType.C);
   const t = data?.main?.temp;
 
   useEffect(() => {
     (async () => {
-      await fetchWhetherData(city);
+      await fetchWhetherData('Архангельск');
     })();
   }, []);
-
-  const searchCityHandler = async (cityName) => {
-    if (error) setError(false);
-    await fetchWhetherData(cityName);
-    setCity(cityName);
-  };
 
   return (
     <div className="container">
       <header className="header">
         <ChooseCity
           city={city}
-          onSubmit={searchCityHandler}
+          onSubmit={fetchWhetherData}
         />
         <Switcher
           active={unit}
@@ -51,7 +44,7 @@ const App = () => {
       {error && !loading && (
         <Error
           error={error}
-          onTryAgain={() => searchCityHandler(city)}
+          onTryAgain={() => fetchWhetherData(city)}
         />
       )}
 
