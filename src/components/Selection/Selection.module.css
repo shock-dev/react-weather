@@ -10,6 +10,9 @@
 }
 
 .select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     font-size: 30px;
     line-height: 36px;
     flex-grow: 1;
@@ -17,10 +20,6 @@
     border: 0;
     outline: none;
     padding: 0 40px;
-}
-
-.select optgroup {
-    font-size: 10px;
 }
 
 .btn {
