@@ -1,4 +1,4 @@
-import s from './Weather.module.css';
+import s from './Weather.module.scss';
 import Rain from '../../assets/weather/Rain.png';
 import Clouds from '../../assets/weather/Clouds.png';
 import Clear from '../../assets/weather/Clear.png';

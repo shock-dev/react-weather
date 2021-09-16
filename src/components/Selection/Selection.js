@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import s from './Selection.module.css';
+import s from './Selection.module.scss';
 
 const cities = [
   'Москва',

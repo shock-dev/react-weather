@@ -1,4 +1,4 @@
-import s from './Error.module.css';
+import s from './Error.module.scss';
 
 const Error = ({ error, onTryAgain }) => {
   return (

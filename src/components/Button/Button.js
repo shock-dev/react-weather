@@ -1,4 +1,4 @@
-import s from './Button.module.css';
+import s from './Button.module.scss';
 import sprite from '../../assets/[icons].svg';
 
 const Button = ({ onClick, children, icon = null }) => {

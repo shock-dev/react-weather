@@ -29,6 +29,10 @@ const App = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    document.title = `Погода: ${city}`;
+  }, [city]);
+
   return (
     <div className="container">
       <header className="header">

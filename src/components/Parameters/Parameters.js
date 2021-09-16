@@ -1,4 +1,4 @@
-import s from './Parameters.module.css';
+import s from './Parameters.module.scss';
 
 const Parameters = ({ list }) => {
   return (

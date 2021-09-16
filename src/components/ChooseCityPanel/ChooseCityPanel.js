@@ -1,4 +1,4 @@
-import s from './ChooseCityPanel.module.css';
+import s from './ChooseCityPanel.module.scss';
 import Button from '../Button/Button';
 
 const ChooseCityPanel = ({ city, openForm }) => {

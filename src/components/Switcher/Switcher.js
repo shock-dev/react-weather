@@ -1,4 +1,4 @@
-import s from './Switcher.module.css';
+import s from './Switcher.module.scss';
 import UnitsType from '../../types/units';
 
 const switchers = [...Object.values(UnitsType)];
